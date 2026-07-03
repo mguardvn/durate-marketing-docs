@@ -12,17 +12,17 @@
       {
         "group": "Giới thiệu",
         "pages": [
-          "docs/introduction"
+          "introduction"
         ]
       },
       {
         "group": "Chiến dịch Marketing",
         "pages": [
-          "docs/durate/overview",
-          "docs/durate/ab-testing",
-          "docs/durate/landing-page",
-          "docs/durate/ad-copy",
-          "docs/durate/content-calendar"
+          "durate/overview",
+          "durate/ab-testing",
+          "durate/landing-page",
+          "durate/ad-copy",
+          "durate/content-calendar"
         ]
       }
     ]
