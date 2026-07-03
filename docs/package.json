@@ -1,0 +1,10 @@
+{
+  "name": "durate-marketing-docs",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "mintlify dev"
+  },
+  "dependencies": {
+    "mintlify": "latest"
+  }
+}
