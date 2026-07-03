@@ -1,0 +1,122 @@
+---
+title: "A/B Testing Specs"
+description: "Thiết lập thông số kỹ thuật và kế hoạch kiểm thử A/B Testing"
+---
+
+Để đảm bảo tính khoa học và tối ưu hóa ngân sách marketing, chiến dịch áp dụng **7 Nguyên tắc A/B Testing** chuẩn ngành nhằm đo lường hiệu quả quảng cáo và trang đích.
+
+---
+
+## Ⅰ. 7 Nguyên tắc A/B Testing áp dụng
+
+<Steps>
+  <Step title="Single Variable Test (Một biến duy nhất)">
+    Chỉ thay đổi một yếu tố duy nhất giữa các phiên bản (ví dụ: chỉ thay đổi creative trong ad, hoặc chỉ thay đổi headline trên landing page).
+  </Step>
+  <Step title="Testable Hypothesis (Giả thuyết kiểm định)">
+    Mọi thử nghiệm đều bắt đầu bằng giả thuyết: *"Nếu làm [thay đổi X], metric [Y] sẽ tăng [Z%]"*.
+  </Step>
+  <Step title="Statistical Power (Mẫu đủ lớn)">
+    Không dừng thử nghiệm sớm khi chưa đạt đủ số lượng mẫu cần thiết để đạt ý nghĩa thống kê.
+  </Step>
+  <Step title="Test Duration (Thời gian chạy)">
+    Chạy thử nghiệm tối thiểu 7 ngày (khuyến nghị 14 ngày) để loại bỏ sai số theo chu kỳ tuần (Seasonality).
+  </Step>
+  <Step title="No Early Peeking (Không dừng sớm)">
+    Không kiểm tra kết quả hàng giờ và dừng chiến dịch khi chưa đạt đủ kích thước mẫu.
+  </Step>
+  <Step title="Statistical Significance (Ý nghĩa thống kê)">
+    Chỉ công nhận kết quả khi độ tin cậy đạt trên **95%** (chỉ số p-value < 0.05).
+  </Step>
+  <Step title="Documented (Tài liệu hóa)">
+    Ghi chép chi tiết toàn bộ thông số thiết lập và kết quả làm tài nguyên tối ưu hóa sau này.
+  </Step>
+</Steps>
+
+---
+
+## Ⅱ. Thử nghiệm 1: Creative trên Meta Ads (MEP Contractor)
+
+*   **Mục tiêu:** Xác định xem định dạng quảng cáo nào (Banner tĩnh vs. Video thực tế) mang lại CTR cao hơn và chi phí tin nhắn (CPMess) tốt hơn.
+*   **Giả thuyết:** *"Nếu thay thế hình ảnh Banner thiết kế tĩnh (Variant A) bằng Video dọc 9:16 quay thực tế tại nhà máy Đông Anh (Variant B), Tỷ lệ nhấp (CTR) của nhóm MEP sẽ tăng ít nhất 20%."*
+
+### Định nghĩa các Biến thể (Variants)
+
+<CardGroup cols={2}>
+  <Card title="Biến thể A (Control - Image)" icon="image">
+    Ảnh Banner tĩnh hiển thị bản vẽ 3D mặt cắt AHU Durate (vỏ sandwich panel PU 50mm, quạt EC). Nhấn mạnh tiêu chuẩn rò rỉ khí vỏ đạt **Eurovent Class L1** và tiến độ sản xuất 2-4 tuần.
+  </Card>
+  <Card title="Biến thể B (Challenger - Video)" icon="video">
+    Video dọc 45 giây quay thực tế tại xưởng Đông Anh (kỹ sư lắp ráp vỏ panel, lắp quạt EC, cẩu AHU xuất xưởng). Tập trung giải cứu các dự án MEP đang bị dồn tiến độ bàn giao.
+  </Card>
+</CardGroup>
+
+*   **MDE mục tiêu:** 40%
+*   **Quy mô mẫu yêu cầu:** **13,134 impressions** (~9.2 ngày chạy thử).
+
+---
+
+## Ⅲ. Thử nghiệm 2: Landing Page Headline (Hero Section)
+
+*   **Mục tiêu:** Xác định thông điệp tiêu đề chính tại Hero Section mang lại tỷ lệ chuyển đổi điền form tải Whitepaper (CVR) cao nhất.
+*   **Giả thuyết:** *"Nếu sử dụng tiêu đề tập trung vào lợi ích tài chính và ROI (Headline B - Chi phí), tỷ lệ chuyển đổi sẽ cao hơn 40% so với tiêu đề tập trung vào tiến độ giao hàng và giảm rủi ro dừng chuyền (Headline C - Tiến độ)."*
+
+### So sánh biến thể Headline
+
+<CodeGroup>
+```text Headline B (Economic Focus)
+"Cắt giảm đến 22% chi phí điện năng vận hành AHU phòng sạch — Tải ngay báo cáo phân tích TCO."
+```
+
+```text Headline C (Progress Focus)
+"Giao AHU phòng sạch GMP từ 2-4 tuần — Loại bỏ rủi ro dừng chuyền sản xuất."
+```
+</CodeGroup>
+
+### Tính toán quy mô mẫu (Toán học A/B)
+
+Áp dụng công thức tính toán quy mô mẫu tiêu chuẩn với:
+- Tỷ lệ chuyển đổi cơ sở (Baseline CVR): p = 8.0% (0.08)
+- Minimum Detectable Effect (MDE): 40% (tương đương thay đổi tuyệt đối là 3.2%)
+
+```text
+n = [16 * p * (1 - p)] / (Δ^2)
+  = [16 * 0.08 * 0.92] / (0.032^2)
+  = 1.1776 / 0.001024
+  = 1,150 visitors per variant
+```
+
+<AccordionGroup>
+  <Accordion title="💡 Giải thích MDE cho người ngoài ngành (Non-Technical Explanation)">
+    **MDE (Minimum Detectable Effect)** là mức độ chênh lệch hoặc cải tiến tối thiểu mà chúng ta thực sự quan tâm và muốn phát hiện được giữa hai phiên bản thử nghiệm.
+    
+    **Ví von trực quan:**
+    *   **Cân bàn lớn (MDE lớn = 40%):** Chỉ nhảy số khi có sự chênh lệch lớn (ví dụ trên 1kg). Phép đo rất nhanh, chỉ cần cân 1-2 lần là biết kết quả. Điều này tương đương với việc chúng ta chỉ tìm kiếm những tiêu đề thực sự vượt trội hơn hẳn (mang lại mức tăng tỷ lệ chuyển đổi từ 8.0% lên hẳn 11.2%). Nhờ đó, chúng ta chỉ cần **2.300 lượt truy cập** và hoàn thành kiểm thử trong **30 ngày**.
+    *   **Cân tiểu ly tiệm vàng (MDE nhỏ = 5%):** Đo được sự chênh lệch siêu nhỏ (ví dụ 0.001 gram). Phép đo cần cực kỳ cẩn thận, tránh mọi luồng gió và phải đo đi đo lại hàng trăm lần để tránh sai số ngẫu nhiên. Điều này tương đương với việc cố gắng đo xem tiêu đề C có tốt hơn tiêu đề B dù chỉ là 0.4%. Việc này đòi hỏi **hàng chục nghìn lượt truy cập**, không khả thi với ngân sách và thời gian của dự án.
+    
+    **Kết luận:** Thiết lập MDE ở mức 40% giúp chiến dịch tối ưu hóa tài nguyên: chỉ tập trung tìm kiếm các "bứt phá lớn" để ra quyết định nhanh chóng trong vòng 30 ngày, thay vì lãng phí thời gian đo lường những dao động nhỏ không đáng kể.
+  </Accordion>
+</AccordionGroup>
+
+*   **Tổng số lượt truy cập cần thiết:** **2,300 visitors** (cho cả 2 biến thể B và C).
+*   **Thời gian chạy:** Với lượng traffic ước tính 75 visit/ngày, thời gian cần thiết là **30.7 ngày**.
+
+<Note>
+  **Day-7 Check-in Protocol (Giao thức ứng phó khẩn cấp tại Ngày thứ 7):**
+  Nếu CVR điền form (`lead_submit`) dưới 3%, chuyển đổi chỉ số đo lường chính (Primary Metric) từ tỷ lệ gửi form thành công sang tỷ lệ chuyển đổi vi mô (Micro-conversion) như tỷ lệ nhấp chuột vào nút kêu gọi hành động mở form (`form_start`).
+  Do tỷ lệ click này cao hơn (>15%), quy mô mẫu yêu cầu sẽ giảm mạnh xuống dưới 600 visitors/variant, đảm bảo có ý nghĩa thống kê trong 28 ngày.
+</Note>
+
+---
+
+## Ⅳ. Cấu hình Tracking Sự kiện (Events)
+
+Các sự kiện chuyển đổi trên Landing Page được thiết lập qua Google Tag Manager (GTM):
+
+| Tên sự kiện | Định nghĩa kỹ thuật | Nền tảng ghi nhận | Trigger cấu hình trong GTM |
+| :--- | :--- | :--- | :--- |
+| `page_view` | Khi trang tải thành công. | GA4 + Meta Pixel | Page View, URL chứa `/ahu-whitepaper-tco` |
+| `form_start` | Khi nhấp vào ô nhập liệu đầu tiên. | GA4 | Click/Focus, Form ID = `tco-lead-form` |
+| `lead_submit` | Khi gửi form thành công. | GA4 + Meta Pixel | Form Submission thành công hoặc nút Thank You. |
+| `click_zalo` | Khi click chat Zalo OA ở chân trang. | GA4 | Click Link, URL chứa `zalo.me/` |
+| `click_hotline`| Khi click gọi Hotline. | GA4 | Click Link, URL chứa `tel:` |
